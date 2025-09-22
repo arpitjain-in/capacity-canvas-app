@@ -2,39 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Sprint Planning Design System - Professional & Clean */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Background & Text */
+    --background: 240 10% 98%;
+    --foreground: 224 20% 15%;
 
+    /* Cards & Surfaces */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 224 20% 15%;
 
+    /* Popovers & Modals */
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 224 20% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Professional Blue */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 217 91% 55%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Light Blue */
+    --secondary: 217 32% 96%;
+    --secondary-foreground: 217 91% 60%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted - Subtle Grays */
+    --muted: 220 13% 95%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Sprint Orange */
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Success - Holiday Green */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Warning - Capacity Yellow */
+    --warning: 48 96% 89%;
+    --warning-foreground: 25 95% 53%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Borders & Inputs */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
+
+    /* Gradients & Effects */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 55%));
+    --gradient-card: linear-gradient(to bottom, hsl(0 0% 100%), hsl(220 13% 98%));
+    --shadow-card: 0 1px 3px 0 hsl(220 13% 91% / 0.3);
+    --shadow-lg: 0 10px 15px -3px hsl(220 13% 91% / 0.2);
+
+    /* Sprint Status Colors */
+    --sprint-planning: 217 91% 60%;
+    --sprint-active: 142 76% 36%;
+    --sprint-completed: 220 9% 46%;
+    --sprint-blocked: 0 84% 60%;
+
+    /* Calendar Specific */
+    --calendar-today: 25 95% 53%;
+    --calendar-weekend: 220 13% 95%;
+    --calendar-holiday: 142 76% 95%;
 
     --radius: 0.5rem;
 
