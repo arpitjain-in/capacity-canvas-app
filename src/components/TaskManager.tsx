@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import mockData from "@/data/mockData.json";
 import { 
   Select,
   SelectContent,
@@ -23,178 +24,7 @@ interface Task {
 }
 
 const TaskManager = () => {
-  const [tasks] = useState<Task[]>([
-    {
-      id: 1,
-      title: "Setup React Native project and basic navigation",
-      description: "Initialize RN project, configure navigation, setup folder structure",
-      assignee: "Keerthi",
-      status: "completed",
-      sprintId: 1,
-      storyPoints: 5,
-      techStack: ["React Native"]
-    },
-    {
-      id: 2,
-      title: "Design and implement cashier dashboard UI",
-      description: "Create main dashboard interface for cashier operations",
-      assignee: "Keerthi",
-      status: "completed",
-      sprintId: 2,
-      storyPoints: 8,
-      techStack: ["React Native"]
-    },
-    {
-      id: 3,
-      title: "Create category management system",
-      description: "Build UI for managing product categories (vegetables, fruits, milk, frozen)",
-      assignee: "Keerthi",
-      status: "completed",
-      sprintId: 2,
-      storyPoints: 5,
-      techStack: ["React Native"]
-    },
-    {
-      id: 4,
-      title: "Setup NodeJS backend API with GraphQL",
-      description: "Initialize backend server, configure GraphQL endpoints",
-      assignee: "Arpit",
-      status: "completed",
-      sprintId: 3,
-      storyPoints: 8,
-      techStack: ["NodeJS", "GraphQL"]
-    },
-    {
-      id: 5,
-      title: "Design and implement SQL database schema",
-      description: "Create database tables for sales data, categories, and historic records",
-      assignee: "Pure",
-      status: "completed",
-      sprintId: 3,
-      storyPoints: 6,
-      techStack: ["SQL"]
-    },
-    {
-      id: 6,
-      title: "Implement daily sales entry forms",
-      description: "Create forms for entering sales data for each category",
-      assignee: "Keerthi",
-      status: "completed",
-      sprintId: 4,
-      storyPoints: 7,
-      techStack: ["React Native"]
-    },
-    {
-      id: 7,
-      title: "Create data persistence layer",
-      description: "Build API endpoints for storing historic sales data",
-      assignee: "Arpit",
-      status: "completed",
-      sprintId: 4,
-      storyPoints: 6,
-      techStack: ["NodeJS", "GraphQL", "SQL"]
-    },
-    {
-      id: 8,
-      title: "Build historic data display screens",
-      description: "Create tabular views for displaying historical sales data",
-      assignee: "Keerthi",
-      status: "completed",
-      sprintId: 4,
-      storyPoints: 5,
-      techStack: ["React Native"]
-    },
-    {
-      id: 9,
-      title: "Create graphical sales visualization",
-      description: "Implement charts and graphs for sales data visualization",
-      assignee: "Keerthi",
-      status: "in_progress",
-      sprintId: 5,
-      storyPoints: 8,
-      techStack: ["React Native"]
-    },
-    {
-      id: 10,
-      title: "Implement sales comparison logic",
-      description: "Build day-over-day sales comparison with color coding (red/green)",
-      assignee: "Arpit",
-      status: "in_progress",
-      sprintId: 5,
-      storyPoints: 6,
-      techStack: ["NodeJS", "GraphQL"]
-    },
-    {
-      id: 11,
-      title: "Sales data retrieval API endpoints",
-      description: "Create efficient APIs for fetching historic and current sales data",
-      assignee: "Pure",
-      status: "in_progress",
-      sprintId: 5,
-      storyPoints: 5,
-      techStack: ["SQL", "NodeJS"]
-    },
-    {
-      id: 12,
-      title: "Add color coding for sales performance",
-      description: "Implement red/green indicators for sales performance metrics",
-      assignee: "Keerthi",
-      status: "todo",
-      sprintId: 6,
-      storyPoints: 3,
-      techStack: ["React Native"]
-    },
-    {
-      id: 13,
-      title: "Create sales analytics and reporting",
-      description: "Build comprehensive analytics dashboard with reporting features",
-      assignee: "Arpit",
-      status: "todo",
-      sprintId: 6,
-      storyPoints: 8,
-      techStack: ["NodeJS", "GraphQL"]
-    },
-    {
-      id: 14,
-      title: "Implement data validation and error handling",
-      description: "Add robust validation and error handling across the application",
-      assignee: "Pure",
-      status: "todo",
-      sprintId: 6,
-      storyPoints: 5,
-      techStack: ["SQL", "NodeJS"]
-    },
-    {
-      id: 15,
-      title: "Add user authentication and role management",
-      description: "Implement login system and role-based access control",
-      assignee: "Arpit",
-      status: "todo",
-      sprintId: 6,
-      storyPoints: 7,
-      techStack: ["NodeJS", "GraphQL"]
-    },
-    {
-      id: 16,
-      title: "Testing and quality assurance",
-      description: "Comprehensive testing of all features and bug fixes",
-      assignee: "Keerthi",
-      status: "todo",
-      sprintId: 6,
-      storyPoints: 8,
-      techStack: ["React Native"]
-    },
-    {
-      id: 17,
-      title: "Deployment setup and production configuration",
-      description: "Configure production environment and deployment pipeline",
-      assignee: "Pure",
-      status: "todo",
-      sprintId: 6,
-      storyPoints: 6,
-      techStack: ["NodeJS", "SQL"]
-    }
-  ]);
+  const [tasks] = useState<Task[]>(mockData.tasks as Task[]);
 
   const [filterStatus, setFilterStatus] = useState<string>("all");
   const [filterAssignee, setFilterAssignee] = useState<string>("all");
@@ -248,14 +78,7 @@ const TaskManager = () => {
     todo: tasks.filter(t => t.status === "todo").length,
   };
 
-  const sprintNames = {
-    1: "Sprint 1 - RN Setup",
-    2: "Sprint 2 - UI & Categories", 
-    3: "Sprint 3 - Backend & DB",
-    4: "Sprint 4 - Data & Display",
-    5: "Sprint 5 - Analytics",
-    6: "Sprint 6 - Testing & Deploy"
-  };
+  const sprintNames = mockData.sprintNames;
 
   return (
     <div className="space-y-6">
@@ -363,7 +186,7 @@ const TaskManager = () => {
                         <span>{task.assignee}</span>
                       </div>
                       <span>SP: {task.storyPoints}</span>
-                      <span>{sprintNames[task.sprintId as keyof typeof sprintNames]}</span>
+                      <span>{sprintNames[task.sprintId.toString() as keyof typeof sprintNames]}</span>
                     </div>
                     <div className="flex flex-wrap gap-1 mt-2">
                       {task.techStack.map((tech, index) => (

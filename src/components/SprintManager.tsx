@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import mockData from "@/data/mockData.json";
 import { 
   Dialog, 
   DialogContent, 
@@ -34,56 +35,7 @@ interface Sprint {
 }
 
 const SprintManager = () => {
-  const [sprints, setSprints] = useState<Sprint[]>([
-    {
-      id: 1,
-      name: "Sprint 1 - React Native Setup & Navigation",
-      startDate: "2025-09-02",
-      endDate: "2025-09-06",
-      status: "completed",
-      workingDays: 5,
-    },
-    {
-      id: 2,
-      name: "Sprint 2 - Cashier Dashboard & Category Management",
-      startDate: "2025-09-09",
-      endDate: "2025-09-13",
-      status: "completed",
-      workingDays: 5,
-    },
-    {
-      id: 3,
-      name: "Sprint 3 - Backend API & Database Schema",
-      startDate: "2025-09-16",
-      endDate: "2025-09-20",
-      status: "completed",
-      workingDays: 5,
-    },
-    {
-      id: 4,
-      name: "Sprint 4 - Data Display & Visualization",
-      startDate: "2025-09-23",
-      endDate: "2025-09-27",
-      status: "completed",
-      workingDays: 5,
-    },
-    {
-      id: 5,
-      name: "Sprint 5 - Sales Analytics & Reporting",
-      startDate: "2025-09-30",
-      endDate: "2025-10-04",
-      status: "active",
-      workingDays: 5,
-    },
-    {
-      id: 6,
-      name: "Sprint 6 - Testing & Deployment Setup",
-      startDate: "2025-10-07",
-      endDate: "2025-10-11",
-      status: "planning",
-      workingDays: 5,
-    },
-  ]);
+  const [sprints, setSprints] = useState<Sprint[]>(mockData.sprints as Sprint[]);
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [editingSprint, setEditingSprint] = useState<Sprint | null>(null);

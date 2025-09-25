@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
+import mockData from "@/data/mockData.json";
 import { 
   Dialog, 
   DialogContent, 
@@ -24,32 +25,7 @@ interface Engineer {
 }
 
 const CapacityTracker = () => {
-  const [engineers, setEngineers] = useState<Engineer[]>([
-    {
-      id: 1,
-      name: "Keerthi",
-      role: "React Native Developer",
-      capacity: 90,
-      availableDays: 5,
-      allocatedDays: 4.5,
-    },
-    {
-      id: 2,
-      name: "Arpit",
-      role: "Backend Developer (NodeJS/GraphQL)",
-      capacity: 85,
-      availableDays: 5,
-      allocatedDays: 4.25,
-    },
-    {
-      id: 3,
-      name: "Pure",
-      role: "Database Engineer (SQL)",
-      capacity: 90,
-      availableDays: 5,
-      allocatedDays: 4.5,
-    },
-  ]);
+  const [engineers, setEngineers] = useState<Engineer[]>(mockData.engineers);
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [editingEngineer, setEditingEngineer] = useState<Engineer | null>(null);

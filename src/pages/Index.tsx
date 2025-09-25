@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar, Users, Clock, Settings, ListTodo } from "lucide-react";
+import mockData from "@/data/mockData.json";
 import SprintCalendar from "@/components/SprintCalendar";
 import SprintManager from "@/components/SprintManager";
 import CapacityTracker from "@/components/CapacityTracker";
@@ -12,29 +13,8 @@ import TaskManager from "@/components/TaskManager";
 const Index = () => {
   const [activeTab, setActiveTab] = useState("calendar");
 
-  const mockStats = {
-    totalSprints: 6,
-    activeSprints: 1,
-    totalEngineers: 3,
-    plannedCapacity: 88,
-  };
-
-  const mockUpcomingSprints = [
-    {
-      id: 5,
-      name: "Sprint 5 - Sales Analytics & Reporting",
-      startDate: "2025-09-30",
-      status: "active",
-      workingDays: 5,
-    },
-    {
-      id: 6,
-      name: "Sprint 6 - Testing & Deployment Setup", 
-      startDate: "2025-10-07",
-      status: "planning",
-      workingDays: 5,
-    },
-  ];
+  const mockStats = mockData.stats;
+  const mockUpcomingSprints = mockData.upcomingSprints;
 
   return (
     <div className="min-h-screen bg-background">
