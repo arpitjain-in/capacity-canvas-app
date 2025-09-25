@@ -2,36 +2,37 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Users, Clock, Settings } from "lucide-react";
+import { Calendar, Users, Clock, Settings, ListTodo } from "lucide-react";
 import SprintCalendar from "@/components/SprintCalendar";
 import SprintManager from "@/components/SprintManager";
 import CapacityTracker from "@/components/CapacityTracker";
 import HolidayManager from "@/components/HolidayManager";
+import TaskManager from "@/components/TaskManager";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("calendar");
 
   const mockStats = {
-    totalSprints: 12,
-    activeSprints: 2,
-    totalEngineers: 8,
-    plannedCapacity: 85,
+    totalSprints: 6,
+    activeSprints: 1,
+    totalEngineers: 3,
+    plannedCapacity: 88,
   };
 
   const mockUpcomingSprints = [
     {
-      id: 1,
-      name: "Sprint 23 - User Authentication",
-      startDate: "2024-01-15",
-      status: "planning",
-      workingDays: 10,
+      id: 5,
+      name: "Sprint 5 - Sales Analytics & Reporting",
+      startDate: "2025-09-30",
+      status: "active",
+      workingDays: 5,
     },
     {
-      id: 2,
-      name: "Sprint 24 - Dashboard Revamp", 
-      startDate: "2024-01-29",
-      status: "active",
-      workingDays: 8,
+      id: 6,
+      name: "Sprint 6 - Testing & Deployment Setup", 
+      startDate: "2025-10-07",
+      status: "planning",
+      workingDays: 5,
     },
   ];
 
@@ -113,6 +114,7 @@ const Index = () => {
             { id: "calendar", label: "Calendar", icon: Calendar },
             { id: "sprints", label: "Sprints", icon: Clock },
             { id: "capacity", label: "Capacity", icon: Users },
+            { id: "tasks", label: "Tasks", icon: ListTodo },
             { id: "holidays", label: "Holidays", icon: Settings },
           ].map((tab) => (
             <Button
@@ -135,6 +137,7 @@ const Index = () => {
             {activeTab === "calendar" && <SprintCalendar />}
             {activeTab === "sprints" && <SprintManager />}
             {activeTab === "capacity" && <CapacityTracker />}
+            {activeTab === "tasks" && <TaskManager />}
             {activeTab === "holidays" && <HolidayManager />}
           </div>
 
