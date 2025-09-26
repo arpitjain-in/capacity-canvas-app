@@ -9,6 +9,7 @@ import SprintManager from "@/components/SprintManager";
 import CapacityTracker from "@/components/CapacityTracker";
 import HolidayManager from "@/components/HolidayManager";
 import TaskManager from "@/components/TaskManager";
+import DataControls from "@/components/DataControls";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("calendar");
@@ -117,7 +118,12 @@ const Index = () => {
             {activeTab === "calendar" && <SprintCalendar />}
             {activeTab === "sprints" && <SprintManager />}
             {activeTab === "capacity" && <CapacityTracker />}
-            {activeTab === "tasks" && <TaskManager />}
+            {activeTab === "tasks" && (
+              <div>
+                <DataControls />
+                <TaskManager />
+              </div>
+            )}
             {activeTab === "holidays" && <HolidayManager />}
           </div>
 

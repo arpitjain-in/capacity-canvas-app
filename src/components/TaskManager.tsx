@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import mockData from "@/data/mockData.json";
+import { dataService } from "@/utils/dataService";
 import { 
   Select,
   SelectContent,
@@ -10,7 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CheckCircle, Circle, User, Clock, Filter } from "lucide-react";
+import { CheckCircle, Circle, User, Clock, Filter, ArrowRight, Edit, Plus } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface Task {
   id: number;
@@ -24,10 +25,44 @@ interface Task {
 }
 
 const TaskManager = () => {
-  const [tasks] = useState<Task[]>(mockData.tasks as Task[]);
-
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [filterStatus, setFilterStatus] = useState<string>("all");
   const [filterAssignee, setFilterAssignee] = useState<string>("all");
+  const { toast } = useToast();
+
+  // Load initial data
+  useEffect(() => {
+    setTasks(dataService.getTasks());
+  }, []);
+
+  // Data persistence using dataService
+  const updateTaskStatus = (taskId: number, newStatus: Task["status"]) => {
+    const updatedTasks = dataService.updateTask(taskId, { status: newStatus });
+    setTasks(updatedTasks);
+    toast({
+      title: "Status Updated",
+      description: `Task status changed to ${getStatusLabel(newStatus)}`,
+    });
+  };
+
+  const reassignTask = (taskId: number, newAssignee: Task["assignee"]) => {
+    const updatedTasks = dataService.updateTask(taskId, { assignee: newAssignee });
+    setTasks(updatedTasks);
+    toast({
+      title: "Task Reassigned",
+      description: `Task assigned to ${newAssignee}`,
+    });
+  };
+
+  const getNextStatus = (currentStatus: Task["status"]): Task["status"] | null => {
+    const statusFlow = {
+      todo: "in_progress",
+      in_progress: "completed",
+      completed: null,
+      blocked: "todo"
+    } as const;
+    return statusFlow[currentStatus] as Task["status"] | null;
+  };
 
   const getStatusColor = (status: Task["status"]) => {
     const colors = {
@@ -78,7 +113,14 @@ const TaskManager = () => {
     todo: tasks.filter(t => t.status === "todo").length,
   };
 
-  const sprintNames = mockData.sprintNames;
+  const sprintNames = {
+    "1": "Sprint 1 - RN Setup",
+    "2": "Sprint 2 - UI & Categories", 
+    "3": "Sprint 3 - Backend & DB",
+    "4": "Sprint 4 - Data & Display",
+    "5": "Sprint 5 - Analytics",
+    "6": "Sprint 6 - Testing & Deploy"
+  };
 
   return (
     <div className="space-y-6">
@@ -196,6 +238,45 @@ const TaskManager = () => {
                       ))}
                     </div>
                   </div>
+                </div>
+                
+                {/* Action Buttons */}
+                <div className="flex items-center space-x-2 ml-4">
+                  {getNextStatus(task.status) && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => updateTaskStatus(task.id, getNextStatus(task.status)!)}
+                      className="flex items-center space-x-1"
+                    >
+                      <ArrowRight className="h-3 w-3" />
+                      <span className="text-xs">
+                        {getStatusLabel(getNextStatus(task.status)!)}
+                      </span>
+                    </Button>
+                  )}
+                  
+                  <Select
+                    value={task.assignee}
+                    onValueChange={(newAssignee: Task["assignee"]) => reassignTask(task.id, newAssignee)}
+                  >
+                    <SelectTrigger className="w-20 h-8">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Keerthi">Keerthi</SelectItem>
+                      <SelectItem value="Arpit">Arpit</SelectItem>
+                      <SelectItem value="Pure">Pure</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => toast({ title: "Edit Task", description: "Edit functionality coming soon!" })}
+                  >
+                    <Edit className="h-3 w-3" />
+                  </Button>
                 </div>
               </div>
             ))}
