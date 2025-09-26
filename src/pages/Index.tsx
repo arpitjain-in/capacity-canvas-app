@@ -10,9 +10,17 @@ import CapacityTracker from "@/components/CapacityTracker";
 import HolidayManager from "@/components/HolidayManager";
 import TaskManager from "@/components/TaskManager";
 import DataControls from "@/components/DataControls";
+import CreateSprintModal from "@/components/CreateSprintModal";
+import AddHolidayModal from "@/components/AddHolidayModal";
+import ManageTeamModal from "@/components/ManageTeamModal";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("calendar");
+  
+  // Modal states
+  const [isCreateSprintOpen, setIsCreateSprintOpen] = useState(false);
+  const [isAddHolidayOpen, setIsAddHolidayOpen] = useState(false);
+  const [isManageTeamOpen, setIsManageTeamOpen] = useState(false);
 
   const mockStats = mockData.stats;
   const mockUpcomingSprints = mockData.upcomingSprints;
@@ -161,20 +169,48 @@ const Index = () => {
                 <CardTitle className="text-lg">Quick Actions</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Button className="w-full" size="sm">
+                <Button 
+                  className="w-full" 
+                  size="sm"
+                  onClick={() => setIsCreateSprintOpen(true)}
+                >
                   Create New Sprint
                 </Button>
-                <Button variant="outline" className="w-full" size="sm">
+                <Button 
+                  variant="outline" 
+                  className="w-full" 
+                  size="sm"
+                  onClick={() => setIsAddHolidayOpen(true)}
+                >
                   Add Holiday
                 </Button>
-                <Button variant="outline" className="w-full" size="sm">
+                <Button 
+                  variant="outline" 
+                  className="w-full" 
+                  size="sm"
+                  onClick={() => setIsManageTeamOpen(true)}
+                >
                   Manage Team
                 </Button>
               </CardContent>
             </Card>
-          </div>
         </div>
       </div>
+
+      {/* Modals */}
+      <CreateSprintModal 
+        isOpen={isCreateSprintOpen} 
+        onClose={() => setIsCreateSprintOpen(false)} 
+      />
+      <AddHolidayModal 
+        isOpen={isAddHolidayOpen} 
+        onClose={() => setIsAddHolidayOpen(false)} 
+      />
+      <ManageTeamModal 
+        isOpen={isManageTeamOpen} 
+        onClose={() => setIsManageTeamOpen(false)} 
+      />
+    </div>
     </div>
   );
 };
